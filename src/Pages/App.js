@@ -33,7 +33,7 @@ function App() {
 
   useEffect(() => {
     setLastCode(localStorage.getItem('last-tracking-code'))
-  }, [localStorage.getItem('last-tracking-code')])
+  }, [])
 
   return (
     <Container>
