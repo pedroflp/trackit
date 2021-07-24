@@ -2,11 +2,21 @@ import { Container } from './styles';
 
 const TrackerCard = ({id, status, data, hora, informations, local}) => {
   return (
-    <Container>
+    <Container
+      delivered={status === "Objeto entregue ao destinatário"}
+    >
       <div className="card-dot" />
       
       <div className="card-top">
-        <span className="card-id">{id}</span>
+        <span className="card-id">
+          { status === "Objeto entregue ao destinatário" ? 
+            <svg width="16" height="12" viewBox="0 0 16 12" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <path d="M5.52495 11.657L0.574951 6.707L1.98895 5.293L5.52645 8.8265L5.52495 8.828L14.01 0.343002L15.424
+              1.757L6.93895 10.243L5.52595 11.656L5.52495 11.657Z" fill="#63c786"/>
+            </svg> 
+            : id
+          }
+        </span>
         <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
         <path 
           d="M12 21C10.7369 19.9226 9.56619 18.7415 8.5 17.469C6.9 15.558 5 12.712 5 9.99999C4.99858 7.16754 6.70425
@@ -21,7 +31,7 @@ const TrackerCard = ({id, status, data, hora, informations, local}) => {
       <div className="card-information">
         {status && <span className="status"><strong>{status} </strong>{(data && hora) && `em ${data} - ${hora}`}</span>}
         <div className="info">
-          {informations && informations.map((information, i) => informations.length > 1 && <span>{information}</span>)}
+          {informations && informations.map((information, i) => !information.includes("<span") && <span>{information}.</span>)}
         </div>
       </div>
     </Container>

@@ -9,14 +9,14 @@ export const Container = styled.div`
   padding: 20px;
   margin: 60px 0px;
   margin-left: 50px;
-  background: #d3e2eb;
+  background-color: ${props => props.delivered ? '#cfffdf' : '#d3e2eb'};
   border-radius: 10px;
   box-shadow: 0 5px 10px rgba(0,0,0,0.07);
   
   .card-dot {
     width: 20px;
     height: 20px;
-    background: #a9b9c2;
+    background-color: ${props => props.delivered ? '#63c786' : '#97b2c2'};
     border-radius: 50%;
     position: absolute;
     left: 0;
@@ -62,7 +62,7 @@ export const Container = styled.div`
 
     .status {
       margin-bottom: 5px;
-      color: #97b2c2;
+      color: ${props => props.delivered ? '#49a369' : '#97b2c2'};
     }
 
     .info {
@@ -71,7 +71,8 @@ export const Container = styled.div`
 
       span {
         font-size: 12px;
-        color: #587382
+        color: #587382;
+        text-transform: capitalize;
       }
     }
   }

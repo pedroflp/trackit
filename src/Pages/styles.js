@@ -81,12 +81,20 @@ export const SearchContainer = styled.div`
       font-size: 18px;
       outline: none;
       font-weight: 500;
+      color: #2E3A59;
       font-family: 'Commissioner';
       box-shadow: 0 0 20px rgba(0,0,0,0.08);
 
       &::placeholder {
         color: #9babc5
       }
+    }
+
+    .last-code-button {
+      position: absolute;
+      right: 0;
+      margin-right: 70px;
+      cursor: pointer;
     }
 
     button {
@@ -112,6 +120,10 @@ export const TrackerContainer = styled.div`
   display: flex;
   justify-content: flex-start;
   align-items: flex-start;
+
+    .last-update {
+      color: #d3e2eb
+    }
   
     .tracker-time-line {
       display: flex;
@@ -128,7 +140,24 @@ export const TrackerContainer = styled.div`
         margin-left: 0px;
       }
     }
-  `
+
+  .not-found {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    margin: auto;
+    padding: 30px;
+    border: 2px dashed #d3e2eb;
+    border-radius: 10px;
+
+    span {
+      color: #2E3A59;
+      font-weight: 500;
+      margin-top: 10px;
+    }
+  }
+`
 
 export const TrackerList = styled.div`
   display: 'flex';
