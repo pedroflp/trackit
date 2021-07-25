@@ -119,6 +119,8 @@ export const SearchContainer = styled.div`
       color: #2E3A59;
       font-family: 'Commissioner';
       box-shadow: 0 0 20px rgba(0,0,0,0.08);
+      position: relative;
+      z-index: 10;
 
       &::placeholder {
         color: #9babc5
@@ -130,6 +132,7 @@ export const SearchContainer = styled.div`
       right: 0;
       margin-right: 70px;
       cursor: pointer;
+      z-index: 11;
     }
 
     button {
@@ -140,6 +143,7 @@ export const SearchContainer = styled.div`
       border: none;
       border-radius: 0px 8px 8px 0px;
       cursor: pointer;
+      z-index: 11;
 
       &:disabled {
         cursor: not-allowed;
