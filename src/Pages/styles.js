@@ -167,6 +167,7 @@ export const TrackerContainer = styled.div`
 
     .last-update {
       color: #d3e2eb;
+      margin: 5px 0;
     }
     
     .tracker-time-line {

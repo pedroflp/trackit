@@ -15,6 +15,8 @@ function App() {
   const [searchResults, setSearchResults] = useState(null)
   const [lastCode, setLastCode] = useState(null)
 
+  console.log(searchResults);
+
   const [loading, setLoading] = useState(false)
   const [responseError, setResponseError] = useState(false)
 
@@ -79,7 +81,7 @@ function App() {
               </svg>
             </div>
           }
-          <button disabled={loading || searchCode === searchResults?.codigo || searchCode.length === 0} onClick={() => handleSearchCode()}>
+          <button disabled={loading || searchCode === searchResults?.codigo || searchCode?.length === 0} onClick={() => handleSearchCode()}>
             <svg width="18" height="17" viewBox="0 0 18 17" fill="none" xmlns="http://www.w3.org/2000/svg">
               <path 
                 d="M15.677 16.607L9.96198 10.891C7.41965 12.6985 3.91642 12.2564 1.90285 9.87395C-0.110711 
@@ -100,7 +102,10 @@ function App() {
           }
           { searchResults?.quantidade > 0 ?
             <div>
-              <span className="last-update">Resultados para {searchResults?.codigo} | {searchResults?.ultimo && 'Última atualização: ' + format(new Date(searchResults?.ultimo), 'dd/mm/yyyy - hh:mm', {locale: ptBR})}</span>
+              <div style={{display: 'flex', flexDirection: 'column'}}>
+                <span className="last-update">Resultados para {searchResults?.codigo} | {searchResults?.ultimo && 'Última atualização: ' + format(new Date(searchResults?.ultimo), 'dd/mm/yyyy - hh:mm', {locale: ptBR})}</span>
+                <span className="last-update"><strong>{searchResults?.servico}</strong></span>
+              </div>
               <div className="tracker-time-line">
                 <div className="line" />
                 <TrackerList>
