@@ -24,7 +24,7 @@ https://linketrack.com/api
 
 ## Visit
 
-[Click here](https://tracker-it.vercel.app) to visit and start use the Track.it
+[Click here](https://trackerit.vercel.app/) to visit and start use the Track.it
 
 ## Author
 
