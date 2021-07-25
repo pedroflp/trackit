@@ -12,6 +12,12 @@ export const Container = styled.div`
   background-color: ${props => props.delivered ? '#cfffdf' : '#d3e2eb'};
   border-radius: 10px;
   box-shadow: 0 5px 10px rgba(0,0,0,0.07);
+
+  @media(max-width: 700px) {
+    margin-left: 0;
+    margin-top: 10px;
+    margin-bottom: 50px;
+  }
   
   .card-dot {
     width: 20px;

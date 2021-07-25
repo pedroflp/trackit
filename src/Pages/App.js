@@ -14,15 +14,17 @@ function App() {
   const [searchCode, setSearchCode] = useState(null)
   const [searchResults, setSearchResults] = useState(null)
   const [lastCode, setLastCode] = useState(null)
-  console.log(searchResults);
+
   const [loading, setLoading] = useState(false)
+  const [responseError, setResponseError] = useState(false)
 
   const handleSearchCode = async () => {
     setLoading(true)
     setSearchResults(null)
+    setResponseError(false)
 
     const response = await api.get(`https://api.linketrack.com/track/json?user=teste&token=1abcd00b2731640e886fb41a8a9671ad1434c599dbaa0a0de9a5aa619f29a83f&codigo=${searchCode}`)
-    .catch(err => console.log(err))
+    .catch(err => err && setResponseError(true))
 
     if (response) {
       setSearchResults(response.data)
@@ -40,23 +42,25 @@ function App() {
      <HeaderContainer>
       <div className="title">
         <h1>Rastreie suas encomendas rápido e fácil!</h1>
-        <h3>Acompanhar o envio da suas encomendas nunca foi tão fácil como agora! Tenha o rastreio na hora e atualizado com as informações mais recente que temos.</h3>
+        <h3>Acompanhar o envio das suas encomendas nunca foi tão fácil como agora! Tenha o rastreio na hora e atualizado com as informações mais recente que temos.</h3>
       </div>
-      <Lottie
-        width={400}
-        height={400}
-        options={{
-          animationData: SkateAnimation,
-          autoplay: true,
-          loop: true,   
-        }}
-      />
+      <div  className="header-animation">
+        <Lottie
+          width={370}
+          height={370}
+          options={{
+            animationData: SkateAnimation,
+            autoplay: true,
+            loop: true,   
+          }}
+        />
+      </div>
      </HeaderContainer>
      <SearchContainer>
         <div className="input-container">
           <input
             value={searchCode}
-            placeholder="Pesquisar por código de rastreio" 
+            placeholder={"Pesquisar pelo código"}
             onChange={e => setSearchCode(e.target.value)} 
             onKeyDown={e => e.key === "Enter" && handleSearchCode()}
           />
@@ -114,12 +118,26 @@ function App() {
                 </TrackerList>
               </div>
             </div>
-            : searchResults &&
-            <div className="not-found">
-              <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
-              <path d="M10 20C4.47715 20 0 15.5228 0 10C0 4.47715 4.47715 0 10 0C15.5228 0 20 4.47715 20 10C19.9939 15.5203 15.5203 19.9939 10 20ZM10 2C5.58172 2 2 5.58172 2 10C2 14.4183 5.58172 18 10 18C14.4183 18 18 14.4183 18 10C17.995 5.58378 14.4162 2.00496 10 2ZM8 16C7.986 16 7.86 15.995 7 15.995H6V15.971C6 15.96 6 15.946 6 15.929C6 15.896 6 15.851 6.007 15.796C6.018 15.647 6.035 15.505 6.059 15.364C6.1339 14.9088 6.27541 14.467 6.479 14.053C6.75697 13.4813 7.18135 12.9935 7.709 12.639L7.723 12.63L7.739 12.618L7.754 12.61H7.76H7.767H7.772H7.779L7.79 12.603C8.45481 12.197 9.22113 11.9879 10 12C10.8096 11.9785 11.6071 12.1996 12.29 12.635C12.8172 12.99 13.2414 13.4777 13.52 14.049C13.7244 14.4626 13.8656 14.9045 13.939 15.36C13.971 15.548 13.985 15.699 13.991 15.792C13.991 15.836 13.997 15.88 13.998 15.925C13.998 15.942 13.998 15.956 13.998 15.967V15.987C13.998 15.987 13.958 15.987 12.998 15.987C12.092 15.987 11.998 15.987 11.998 15.987C11.998 15.987 11.998 15.958 11.998 15.928C11.998 15.873 11.985 15.788 11.967 15.682C11.9251 15.4229 11.8456 15.1712 11.731 14.935C11.6072 14.6753 11.4171 14.4529 11.18 14.29C10.8236 14.0797 10.4133 13.9788 10 14C9.58573 13.9818 9.17529 14.0862 8.82 14.3C8.5832 14.4632 8.39324 14.6856 8.269 14.945C8.15465 15.1813 8.07515 15.4329 8.033 15.692C8.0188 15.7734 8.00879 15.8555 8.003 15.938C8.003 15.966 8.003 15.986 8.003 15.996H8V16ZM6.5 10C5.67157 10 5 9.32843 5 8.5C5 7.67157 5.67157 7 6.5 7C7.32843 7 8 7.67157 8 8.5C8 9.32843 7.32843 10 6.5 10ZM13.493 9.986C12.6684 9.986 12 9.31756 12 8.493C12 7.66844 12.6684 7 13.493 7C14.3176 7 14.986 7.66844 14.986 8.493C14.9849 9.3171 14.3171 9.9849 13.493 9.986Z" fill="#2E3A59"/>
-              </svg>
-              <span>Não consegui achar nada com seu código</span>
+            : (searchResults || responseError) &&
+            <div style={{margin: 'auto'}}>
+              { responseError ?
+                <div className="not-found error">
+                  <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                  <path d="M21.266 20.998H2.73301C2.37575 20.998 2.04563 20.8074 1.867 20.498C1.68837 20.1886 1.68838 19.8074 1.86701 19.498L11.133 3.49799C11.3118 3.1891 11.6416 2.9989 11.9985 2.9989C12.3554 2.9989 12.6852 3.1891 12.864 3.49799L22.13 19.498C22.3085 19.8072 22.3086 20.1882 22.1303 20.4975C21.9519 20.8069 21.6221 20.9976 21.265 20.998H21.266ZM12 5.99799L4.46901 18.998H19.533L12 5.99799ZM12.995 14.999H10.995V9.99799H12.995V14.999Z" fill="rgba(255, 0, 0, 0.5)"/>
+                  <path d="M11 16H13V18H11V16Z" fill="rgba(255, 0, 0, 1)"/>
+                  </svg>
+
+                  <span>Parece que ocorreu algum erro... Tente novamente!</span>
+                </div>
+                :
+                <div className="not-found">
+                  <svg width="22" height="18" viewBox="0 0 22 18" fill="none" xmlns="http://www.w3.org/2000/svg">
+                  <path d="M20.266 17.998H1.73301C1.37575 17.998 1.04563 17.8074 0.867 17.498C0.688374 17.1886 0.688376 16.8074 0.867007 16.498L10.133 0.497992C10.3118 0.189104 10.6416 -0.00109863 10.9985 -0.00109863C11.3554 -0.00109863 11.6852 0.189104 11.864 0.497992L21.13 16.498C21.3085 16.8072 21.3086 17.1882 21.1303 17.4975C20.9519 17.8069 20.6221 17.9976 20.265 17.998H20.266ZM11 2.99799L3.46901 15.998H18.533L11 2.99799ZM11.995 11.999H9.99501V6.99799H11.995V11.999Z" fill="#2E3A59"/>
+                  <path d="M10 13H12V15H10V13Z" fill="#2E3A59"/>
+                  </svg>
+                  <span>Não consegui achar nada ainda com seu código...</span>
+                </div>
+              }
             </div>
           }
         </TrackerContainer>

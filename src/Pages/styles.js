@@ -32,7 +32,7 @@ export const HeaderContainer = styled.div`
     font-family: 'Commissioner';
 
     h1 {
-      max-width: 80%;
+      width: 80%;
       font-weight: 800;
       font-size: 50px;
       line-height: 50px;
@@ -44,6 +44,33 @@ export const HeaderContainer = styled.div`
       font-size: 16px;
       margin-top: 40px;
       color: #6469C3;
+    }
+  }
+
+  @media(max-width: 700px) {
+    .title {
+      position: absolute;
+      z-index: 2;
+      margin: 0;
+      text-shadow: 0 0 10px rgba(255,255,255,1);
+      text-align: center;
+
+      h1 {
+        font-size: 44px;
+        line-height: 44px;
+        width: 100%;
+      }
+
+      h3 {
+        font-weight: 500;
+        margin-top: 70px;
+        font-size: 15px;
+      }
+    }
+
+    .header-animation {
+      opacity: 0.3;
+      filter: blur(0.8px);
     }
   }
 `
@@ -60,6 +87,10 @@ export const SearchContainer = styled.div`
   min-height: 35vh;
   font-family: 'Commissioner';
 
+  @media(max-width: 700px) {
+    padding: 1rem;
+  }
+
   .input-container {
     position: absolute;
     top: 0;
@@ -71,6 +102,10 @@ export const SearchContainer = styled.div`
     justify-content: center;
     align-items: center;
     width: 60%;
+
+    @media(max-width: 1000px) {
+      width: 90%;
+    }
 
     input {
       background-color: white;
@@ -120,11 +155,16 @@ export const TrackerContainer = styled.div`
   display: flex;
   justify-content: flex-start;
   align-items: flex-start;
+  
+  @media(max-width: 700px) {
+    width: 90%;
+    padding: 3rem 0;
+  }
 
     .last-update {
-      color: #d3e2eb
+      color: #d3e2eb;
     }
-  
+    
     .tracker-time-line {
       display: flex;
       justify-content: stretch;
@@ -138,8 +178,13 @@ export const TrackerContainer = styled.div`
         margin: 20px;
         margin-right: 0px;
         margin-left: 0px;
+
+        @media(max-width: 700px) {
+          display: none;
+        }
       }
     }
+
 
   .not-found {
     display: flex;
@@ -155,6 +200,16 @@ export const TrackerContainer = styled.div`
       color: #2E3A59;
       font-weight: 500;
       margin-top: 10px;
+      text-align: center;
+    }
+  }
+
+  .error {
+    background: linear-gradient(35deg, rgba(255, 0, 0, 0.1), transparent);
+    border-color: rgba(255, 0, 0, 0.2);
+
+    span {
+      color: rgba(255, 0, 0, 0.5);
     }
   }
 `
@@ -164,5 +219,4 @@ export const TrackerList = styled.div`
   flex-direction: 'column';
   justify-content: flex-start;
   align-items: flex-start;
-
 `
