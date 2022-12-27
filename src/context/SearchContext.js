@@ -1,5 +1,5 @@
 import { createContext, useEffect, useState } from "react";
-import { HistoryModal } from "../components/HistoryModal";
+import { HistoryModal } from '../components/HistoryModal';
 import { STORAGE_KEYS } from "../constants/keys";
 import { getTrackingInfo } from "../services/request/GetTrackingInfo";
 
