@@ -2,7 +2,7 @@ import { format } from 'date-fns'
 import React from 'react'
 import { CloseButton, Container, HistoryCard, Overlay } from './styles'
 
-export const HistoryModal = ({
+const HistoryModal = ({
   history,
   setIsHistoryOpen,
   handleSearchTrackingInfo
@@ -31,3 +31,5 @@ export const HistoryModal = ({
     </>
   )
 }
+
+export default HistoryModal;
