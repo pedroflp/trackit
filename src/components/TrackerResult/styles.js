@@ -62,7 +62,6 @@ export const TrackerContainer = styled.div`
   }
 
   .error {
-    background: linear-gradient(35deg, rgba(255, 0, 0, 0.1), transparent);
     border-color: rgba(255, 0, 0, 0.2);
 
     span {

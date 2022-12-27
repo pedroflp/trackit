@@ -20,7 +20,7 @@ export const HistoryModal = ({
               </div>
               <button onClick={() => {
                 setIsHistoryOpen(false);
-                handleSearchTrackingInfo(code);
+                handleSearchTrackingInfo({ code });
               }}>Rastrear novamente</button>
             </HistoryCard>
           ))}

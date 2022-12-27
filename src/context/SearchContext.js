@@ -14,21 +14,27 @@ const SearchContextProvider = ({ children }) => {
   const [trackingResult, setTrackingResult] = useState();
   const [searchHistory, setSearchHistory] = useState();
 
-  const handleSearchTrackingInfo = async (searchCode) => {
+  const handleSearchTrackingInfo = async ({ code: searchCode }) => {
     setSearchError();
     setTrackingResult();
     setIsLoadingSearch(true);
 
+    console.log(searchCode)
+
     try {
       const response = await getTrackingInfo(searchCode || code);
-      // const response = getTrackingMoc();
 
-      setTrackingResult(response.data)
-      saveSearchHistory(response.data.codigo)
+      if (response.data) {
+        setTrackingResult(response.data);
+        saveSearchHistory(response.data.codigo);
+      } else {
+        setSearchError(true)
+      }
+
     } catch (error) {
-      setSearchError(true);
+      setSearchError(true)
     } finally {
-      setIsLoadingSearch(false)
+      setIsLoadingSearch(false);
     }
   };
 

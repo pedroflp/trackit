@@ -9,7 +9,9 @@ export const getTrackingInfo = async (code) => {
     }
   });
 
-  return response
+  console.log(response)
+
+  return response;
 }
 
 export const getTrackingMoc = () => {
