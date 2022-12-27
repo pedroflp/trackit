@@ -1,7 +1,7 @@
 import api from "../api";
 
 export const getTrackingInfo = async (code) => {
-  const response = await api.get('?json', {
+  const response = await api.get('', {
     params: {
       user: process.env.REACT_APP_USER_KEY,
       token: process.env.REACT_APP_API_KEY,
