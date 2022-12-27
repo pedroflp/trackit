@@ -12,7 +12,7 @@ export const HistoryModal = ({
       <Container>
         <h1>Histórico de rastreios</h1>
         <div className='history-list'>
-          {history.map(({ code, date, lastEvent }) => (
+          {history.map(({ code, date }) => (
             <HistoryCard key={code}>
               <div>
                 <span>Código: <strong>{code}</strong></span>

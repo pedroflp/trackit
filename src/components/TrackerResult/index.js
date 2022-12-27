@@ -51,15 +51,15 @@ export const TrackerResult = ({
           </TrackerInfo>
           <TrackerInfoGeneral>
             <h1>📦</h1>
-            <span className="last-update">
+            {trackingResults?.codigo && <span className="last-update">
               Resultados para: <br /><strong>{trackingResults?.codigo}</strong>
-            </span>
-            <span className="last-update">Entregue por: <br /><strong>{trackingResults?.servico}</strong></span>
-            <span className="last-update">
+            </span>}
+            {trackingResults?.servico && <span className="last-update">Entregue por: <br /><strong>{trackingResults?.servico}</strong></span>}
+            {trackingResults?.eventos.length > 0 && <span className="last-update">
               Última atualização às: <br /><strong>
                 {trackingResults?.eventos[0]?.hora}, {trackingResults?.eventos[0]?.data}
               </strong>
-            </span>
+            </span>}
           </TrackerInfoGeneral>
         </>
       ) : (trackingResults || searchError) && (

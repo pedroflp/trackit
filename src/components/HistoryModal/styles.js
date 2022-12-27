@@ -19,6 +19,8 @@ export const Container = styled.div`
   .history-list {
     overflow-y: scroll;
     max-height: 60vh;
+    display: flex;
+    flex-direction: column-reverse;
   }
 `
 
@@ -61,6 +63,7 @@ export const HistoryCard = styled.div`
     background-color: ${COLORS.PRIMARY};
     color: ${COLORS.WHITE};
     cursor: pointer;
+    margin-left: auto;
   }
 `
 

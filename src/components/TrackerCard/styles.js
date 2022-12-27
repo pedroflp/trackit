@@ -10,8 +10,8 @@ export const Container = styled.div`
   padding: 20px;
   margin-bottom: 60px;
   margin-left: 50px;
-  background-color: ${props => props.delivered ? '#cfffdf' : COLORS.WHITE};
-  border: 2px solid ${COLORS.BACKGROUND.DARK};
+  background-color: ${props => props.delivered ? COLORS.GREEN.LIGHT : COLORS.WHITE};
+  border: 2px solid ${props => props.delivered ? COLORS.GREEN.DARK : COLORS.BACKGROUND.DARK};
   border-radius: 16px 16px 5px 16px;
   box-shadow: 0px 5px 10px rgba(0,0,0,0.07);
 
@@ -22,7 +22,7 @@ export const Container = styled.div`
   .card-dot {
     width: 25px;
     height: 25px;
-    background-color: ${props => props.delivered ? '#63c786' : '#97b2c2'};
+    background-color: ${props => props.delivered ? COLORS.GREEN.DARK : '#97b2c2'};
     border-radius: 50%;
     position: absolute;
     left: 0;
@@ -45,13 +45,13 @@ export const Container = styled.div`
       display: flex;
       justify-content: center;
       align-items: center;
-      background: ${COLORS.BACKGROUND.DARK_LIGHT};
+      background: ${({ delivered }) => delivered ? COLORS.WHITE : COLORS.BACKGROUND.DARK_LIGHT};
       border-radius: 50%;
       color: ${COLORS.BACKGROUND.DARKER};
       width: 40px;
       height: 40px;
       font-weight: 700;
-      border: 1px solid ${COLORS.BACKGROUND.DARK};
+      border: 1px solid ${({ delivered }) => delivered ? COLORS.GREEN.DARK : COLORS.BACKGROUND.DARK};
     }
 
     .location-time {
@@ -66,18 +66,17 @@ export const Container = styled.div`
 
     .status {
       margin-bottom: 5px;
-      color: ${props => props.delivered ? '#49a369' : COLORS.BACKGROUND.DARK};
+      color: ${props => props.delivered ? COLORS.GREEN.DARK : COLORS.BACKGROUND.DARK};
     }
 
     .info {
       display: flex;
       gap: 10px;
-
+      
       span {
-        font-size: 12px;
-        color: ${COLORS.BACKGROUND.DARK};
-        text-transform: capitalize;
-      }
+      font-size: 12px;
+      text-transform: capitalize;
     }
   }
+}
 `

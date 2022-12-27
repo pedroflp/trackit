@@ -46,8 +46,7 @@ const SearchContextProvider = ({ children }) => {
     const lastTenCodes = history.slice(-10);
 
     const itemIndex = lastTenCodes.findIndex(history => history.code === code);
-    const alreadyInList = false
-    // itemIndex !== -1;
+    const alreadyInList = itemIndex !== -1;
 
     let updatedList = [];
     const currentItemSearched = {

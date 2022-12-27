@@ -2,9 +2,10 @@ import { COLORS } from '../../constants/colors';
 import { Container } from './styles';
 
 const TrackerCard = ({ id, status, data, hora, informations, local }) => {
+  const delivered = status === "Objeto entregue ao destinatário"
   return (
     <Container
-      delivered={status === "Objeto entregue ao destinatário"}
+      delivered={delivered}
     >
       <div className="card-dot" />
 
@@ -24,13 +25,15 @@ const TrackerCard = ({ id, status, data, hora, informations, local }) => {
           4.61338 9.32107 3.52939C11.9379 2.44539 14.9501 3.04523 16.952 5.04899C18.2685 6.3596 19.0059 8.14238 19 9.99999C19
           12.712 17.1 15.558 15.5 17.469C14.4338 18.7415 13.2631 19.9226 12 21ZM12 6.99999C10.9282 6.99999 9.93782 7.57179
           9.40193 8.49999C8.86603 9.42819 8.86603 10.5718 9.40193 11.5C9.93782 12.4282 10.9282 13 12 13C13.6569 13 15 11.6568
-          15 9.99999C15 8.34313 13.6569 6.99999 12 6.99999Z" fill={COLORS.BACKGROUND.DARK}
+          15 9.99999C15 8.34313 13.6569 6.99999 12 6.99999Z" fill={delivered ? COLORS.GREEN.DARK : COLORS.BACKGROUND.DARK}
           />
         </svg>
-        {local && <span className='location-time'>{local} <strong>{(data && hora) && `- ${data} às ${hora}`}</strong></span>}
+        {local && <span className='location-time' style={{
+          color: delivered ? COLORS.GREEN.DARKER : COLORS.BACKGROUND.DARK
+        }}>{local} <strong>{(data && hora) && `- ${data} às ${hora}`}</strong></span>}
       </div>
       <div className="card-information">
-        {status && <span className="status">{status}</span>}
+        {status && <span className="status" delivered={delivered}>{status}</span>}
         <div className="info">
           {informations && informations.map((information, i) => !information.includes("<span") && <span key={i}>{information}.</span>)}
         </div>
