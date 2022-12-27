@@ -1,33 +1,33 @@
 import styled from 'styled-components'
+import { COLORS } from '../../constants/colors'
 
 export const Container = styled.div`
-  width: 100%;
   display: flex;
+  flex: 1;
   justify-content: center;
   align-items: flex-start;
   flex-direction: column;
   padding: 20px;
-  margin: 60px 0px;
+  margin-bottom: 60px;
   margin-left: 50px;
-  background-color: ${props => props.delivered ? '#cfffdf' : '#d3e2eb'};
-  border-radius: 10px;
-  box-shadow: 0 5px 10px rgba(0,0,0,0.07);
+  background-color: ${props => props.delivered ? '#cfffdf' : COLORS.WHITE};
+  border: 2px solid ${COLORS.BACKGROUND.DARK};
+  border-radius: 16px 16px 5px 16px;
+  box-shadow: 0px 5px 10px rgba(0,0,0,0.07);
 
-  @media(max-width: 700px) {
-    margin-left: 0;
-    margin-top: 10px;
-    margin-bottom: 50px;
+  &:last-child {
+    margin-bottom: 0px;
   }
   
   .card-dot {
-    width: 20px;
-    height: 20px;
+    width: 25px;
+    height: 25px;
     background-color: ${props => props.delivered ? '#63c786' : '#97b2c2'};
     border-radius: 50%;
     position: absolute;
     left: 0;
-    margin-left: -9px;
-    border: 4px solid rgb(245, 251, 255);
+    margin-left: -12px;
+    border: 6px solid rgb(245, 251, 255);
   }
 
   
@@ -41,24 +41,22 @@ export const Container = styled.div`
       position: absolute;
       left: 0;
       top: 0;
+      transform: translate(-100%, -100%);
       display: flex;
       justify-content: center;
       align-items: center;
-      transform: translate(-120%, -100%);
-      background: white;
+      background: ${COLORS.BACKGROUND.DARK_LIGHT};
       border-radius: 50%;
-      padding: 10px;
-      width: 30px;
-      color: #9babc5;
-      height: 30px;
+      color: ${COLORS.BACKGROUND.DARKER};
+      width: 40px;
+      height: 40px;
       font-weight: 700;
-      box-shadow: 0 0 10px rgba(0,0,0,0.12);
+      border: 1px solid ${COLORS.BACKGROUND.DARK};
     }
 
-    span {
+    .location-time {
       margin-left: 5px;
-      font-weight: 700;
-      color: #506e80;
+      color: ${COLORS.BACKGROUND.DARKER};
     }
   }
 
@@ -68,7 +66,7 @@ export const Container = styled.div`
 
     .status {
       margin-bottom: 5px;
-      color: ${props => props.delivered ? '#49a369' : '#97b2c2'};
+      color: ${props => props.delivered ? '#49a369' : COLORS.BACKGROUND.DARK};
     }
 
     .info {
@@ -77,7 +75,7 @@ export const Container = styled.div`
 
       span {
         font-size: 12px;
-        color: #587382;
+        color: ${COLORS.BACKGROUND.DARK};
         text-transform: capitalize;
       }
     }
