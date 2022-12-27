@@ -1,7 +1,7 @@
 import { createContext, useEffect, useState } from "react";
-import HistoryModal from '.././components/HistoryModal/index';
 import { STORAGE_KEYS } from "../constants/keys";
 import { getTrackingInfo } from "../services/request/GetTrackingInfo";
+import { HistoryModal } from "./HistoryModal";
 
 export const SearchContext = createContext({});
 
