@@ -9,8 +9,6 @@ export const getTrackingInfo = async (code) => {
     }
   });
 
-  console.log(response)
-
   return response;
 }
 

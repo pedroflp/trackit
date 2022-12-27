@@ -12,9 +12,10 @@ export const HistoryModal = ({
       <Container>
         <h1>Histórico de rastreios</h1>
         <div className='history-list'>
-          {history.map(({ code, date }) => (
+          {history.map(({ code, date, label }) => (
             <HistoryCard key={code}>
               <div>
+                {label && <span>Nome: <strong>{label}</strong></span>}
                 <span>Código: <strong>{code}</strong></span>
                 <span>Última busca em: <strong>{format(new Date(date), 'dd/MM/yyyy, HH:mm')}</strong></span>
               </div>

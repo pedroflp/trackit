@@ -10,12 +10,17 @@ import { Container, ContentContainer, HeaderContainer, HistoryButton, SearchCont
 function SearchPage() {
   const {
     code,
-    searchHistory,
     hasTrackingInfo,
     isLoadingSearch,
     searchError,
+    searchHistory,
     setIsHistoryOpen,
     trackingResult,
+    packageName,
+    setPackageName,
+    isEditingPackageName,
+    setIsEditingPackageName,
+    handleSavePackageName,
     handleSearchTrackingInfo,
     handleChangeCode,
   } = useSearch();
@@ -64,7 +69,11 @@ function SearchPage() {
               <SearchIcon />
             </button>
           </div>
-          {!!searchHistory && <HistoryButton onClick={() => setIsHistoryOpen(true)}>Histórico de rastreios</HistoryButton>}
+          {searchHistory?.length > 0 &&
+            <HistoryButton onClick={() => setIsHistoryOpen(true)}>
+              Histórico de rastreios
+            </HistoryButton>
+          }
         </SearchContainer>
 
         <TrackerResult
@@ -73,6 +82,11 @@ function SearchPage() {
           trackingResults={trackingResult}
           searchError={searchError}
           searchHistory={searchHistory}
+          packageName={packageName}
+          setPackageName={setPackageName}
+          handleSavePackageName={handleSavePackageName}
+          isEditingPackageName={isEditingPackageName}
+          setIsEditingPackageName={setIsEditingPackageName}
         />
 
         <footer>

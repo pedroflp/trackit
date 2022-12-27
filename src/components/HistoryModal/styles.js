@@ -40,6 +40,7 @@ export const HistoryCard = styled.div`
   padding: 1rem;
   margin-top: 1rem;
   display: flex;
+  align-items: center;
   gap: 32px;
 
   div {
@@ -48,18 +49,18 @@ export const HistoryCard = styled.div`
 
     span {
       color: #3a3a3a;
-
-      strong {
-        color: ${COLORS.PRIMARY}
-      }
+    }
+    
+    strong {
+      color: ${COLORS.PRIMARY}
     }
   }
 
   button {
     font-family: 'Commissioner';
     border: none;
-    border-radius: 50px;
-    padding: 8px 16px;
+    border-radius: 30px;
+    padding: 12px 16px;
     background-color: ${COLORS.PRIMARY};
     color: ${COLORS.WHITE};
     cursor: pointer;

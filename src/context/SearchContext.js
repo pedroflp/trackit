@@ -1,25 +1,34 @@
+/* eslint-disable array-callback-return */
+/* eslint-disable react-hooks/exhaustive-deps */
 import { createContext, useEffect, useState } from "react";
-import { HistoryModal } from "../components/HistoryModal/HistoryModal";
+import { HistoryModal } from "../components/HistoryModal";
 import { STORAGE_KEYS } from "../constants/keys";
 import { getTrackingInfo } from "../services/request/GetTrackingInfo";
 
 export const SearchContext = createContext({});
 
 const SearchContextProvider = ({ children }) => {
+  const storagedHistory = JSON.parse(localStorage.getItem(STORAGE_KEYS.LAST_TRACKING_RESULTS)) || [];
+
   const [isHistoryOpen, setIsHistoryOpen] = useState(false);
   const [isLoadingSearch, setIsLoadingSearch] = useState(false);
-  const [searchError, setSearchError] = useState();
+  const [searchError, setSearchError] = useState(false);
 
   const [code, setCode] = useState('');
-  const [trackingResult, setTrackingResult] = useState();
-  const [searchHistory, setSearchHistory] = useState();
+  const [trackingResult, setTrackingResult] = useState([]);
+  const [searchHistory, setSearchHistory] = useState([]);
+
+  const [packageName, setPackageName] = useState('');
+  const [isEditingPackageName, setIsEditingPackageName] = useState(false);
+
+  const hasTrackingInfo = trackingResult?.quantidade > 0;
+  const handleChangeCode = (e) => setCode(e.target.value);
 
   const handleSearchTrackingInfo = async ({ code: searchCode }) => {
-    setSearchError();
-    setTrackingResult();
+    setSearchError(false);
+    setTrackingResult([]);
+    setPackageName('');
     setIsLoadingSearch(true);
-
-    console.log(searchCode)
 
     try {
       const response = await getTrackingInfo(searchCode || code);
@@ -27,8 +36,12 @@ const SearchContextProvider = ({ children }) => {
       if (response.data) {
         setTrackingResult(response.data);
         saveSearchHistory(response.data.codigo);
-      } else {
-        setSearchError(true)
+
+        storagedHistory.find(item => {
+          if (item.code === response.data.codigo) {
+            setPackageName(item.label)
+          }
+        });
       }
 
     } catch (error) {
@@ -39,25 +52,25 @@ const SearchContextProvider = ({ children }) => {
   };
 
   const saveSearchHistory = (code) => {
-    const history =
-      JSON.parse(localStorage.getItem(STORAGE_KEYS.LAST_TRACKING_RESULTS)) ||
-      [];
-
-    const lastTenCodes = history.slice(-10);
+    const lastTenCodes = storagedHistory.slice(-10);
 
     const itemIndex = lastTenCodes.findIndex(history => history.code === code);
     const alreadyInList = itemIndex !== -1;
-
     let updatedList = [];
-    const currentItemSearched = {
-      code: code,
-      date: new Date().toISOString()
-    };
 
     if (alreadyInList) {
       updatedList = lastTenCodes;
-      updatedList[itemIndex] = currentItemSearched;
+      updatedList[itemIndex] = {
+        ...updatedList[itemIndex],
+        date: new Date().toISOString()
+      };
     } else {
+      const currentItemSearched = {
+        code: code,
+        date: new Date().toISOString(),
+        label: ''
+      };
+
       updatedList = lastTenCodes;
       updatedList.length >= 10
         ? updatedList[0] = currentItemSearched
@@ -65,23 +78,27 @@ const SearchContextProvider = ({ children }) => {
     }
 
     const newHistory = updatedList.sort((a, b) => b.date - a.date);
-    localStorage.setItem(STORAGE_KEYS.LAST_TRACKING_RESULTS, JSON.stringify(newHistory));
+    saveHistoryStateAndStorage(newHistory);
   }
 
-  const handleChangeCode = (e) => setCode(e.target.value);
+  const handleSavePackageName = (code) => {
+    const history = [...searchHistory].map(item => item.code === code
+      ? ({ ...item, label: packageName })
+      : item
+    );
 
-  const handleClearSearch = () => {
-    setSearchError();
-    setTrackingResult();
-    setCode();
-  }
+    saveHistoryStateAndStorage(history);
+    setIsEditingPackageName(false);
+  };
+
+  const saveHistoryStateAndStorage = (history) => {
+    setSearchHistory(history);
+    localStorage.setItem(STORAGE_KEYS.LAST_TRACKING_RESULTS, JSON.stringify(history));
+  };
 
   useEffect(() => {
-    const storagedHistory = JSON.parse(localStorage.getItem(STORAGE_KEYS.LAST_TRACKING_RESULTS))
-    setSearchHistory(storagedHistory);
-  }, [])
-
-  const hasTrackingInfo = trackingResult?.quantidade > 0;
+    if (storagedHistory?.length !== searchHistory?.length) setSearchHistory(storagedHistory);
+  }, [storagedHistory, searchHistory])
 
   return (
     <SearchContext.Provider value={{
@@ -92,9 +109,14 @@ const SearchContextProvider = ({ children }) => {
       isLoadingSearch,
       searchError,
 
+      packageName,
+      setPackageName,
+      handleSavePackageName,
+
       handleSearchTrackingInfo,
       handleChangeCode,
-      handleClearSearch,
+      isEditingPackageName,
+      setIsEditingPackageName,
 
       isHistoryOpen,
       setIsHistoryOpen,

@@ -28,12 +28,20 @@ const TrackerCard = ({ id, status, data, hora, informations, local }) => {
           15 9.99999C15 8.34313 13.6569 6.99999 12 6.99999Z" fill={delivered ? COLORS.GREEN.DARK : COLORS.BACKGROUND.DARK}
           />
         </svg>
-        {local && <span className='location-time' style={{
-          color: delivered ? COLORS.GREEN.DARKER : COLORS.BACKGROUND.DARK
-        }}>{local} <strong>{(data && hora) && `- ${data} às ${hora}`}</strong></span>}
+        {local && <span
+          className='location-time'
+          style={{
+            color: delivered ? COLORS.GREEN.DARKER : COLORS.BACKGROUND.DARK
+          }}
+        >{local} <strong>{(data && hora) && `- ${data} às ${hora}`}</strong></span>}
       </div>
       <div className="card-information">
-        {status && <span className="status" delivered={delivered}>{status}</span>}
+        {status && <span
+          className="status"
+          style={{
+            color: delivered ? COLORS.GREEN.DARKER : COLORS.BACKGROUND.DARK
+          }}
+        >{status}</span>}
         <div className="info">
           {informations && informations.map((information, i) => !information.includes("<span") && <span key={i}>{information}.</span>)}
         </div>

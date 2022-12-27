@@ -117,7 +117,7 @@ export const EmptyState = styled.div`
   opacity: 0.35;
   padding: 2rem;
   margin: 5rem auto;
-  width: 30%;
+  width: 35rem;
   display: flex;
   flex-direction: column;
   gap: 16px;
@@ -131,4 +131,38 @@ export const EmptyState = styled.div`
     color: ${COLORS.PRIMARY};
     font-size: 17px;
   }
+`;
+
+export const PackageNameContainer = styled.div`
+  display: flex;
+  gap: 8px;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  margin: auto;
+  width: 70%;
+`
+
+export const PackageNameInput = styled.input`
+  background: transparent;
+  font-size: 16px;
+  font-weight: 700;
+  width: 100%;
+  color: ${COLORS.BACKGROUND.DARKER};
+  border: none;
+  text-transform: initial;
+  text-align: center;
+  font-family: 'Commissioner';
+  outline: none;
+
+  &::placeholder {
+    color: ${COLORS.BACKGROUND.DARK}
+  }
+`
+
+export const EditPackageNameButton = styled.div`
+  position: absolute;
+  cursor: pointer;
+  right: -20px;
+  bottom: -2px;
 `
