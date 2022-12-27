@@ -1,14 +1,27 @@
 import { Puff } from '@agney/react-loading'
 import React from 'react'
 import TrackerCard from '../TrackerCard'
-import { TrackerContainer, TrackerInfo, TrackerInfoGeneral, TrackerList } from './styles'
+import { EmptyState, TrackerContainer, TrackerInfo, TrackerInfoGeneral, TrackerList } from './styles'
 
 export const TrackerResult = ({
   isLoadingSearch,
   trackingResults,
   searchError,
   hasTrackingInfo,
+  searchHistory,
 }) => {
+  if (!isLoadingSearch && !searchError && !hasTrackingInfo) return (
+    <EmptyState>
+      <strong>As informações do seu rastreio irão aparecer aqui.</strong>
+      <span>Digite o código na barra de busca e clique na lupinha<br />
+        <b>{!!searchHistory && `ou veja seus últimos rastreios no histórico!`}</b> <br />
+        Lembrando que, seu código deve ser parecido com esse baixo <br />
+        para funcionar o rastreio!
+      </span>
+      <strong>XX123456789YY</strong>
+    </EmptyState>
+  )
+
   return (
     <TrackerContainer>
       {isLoadingSearch &&

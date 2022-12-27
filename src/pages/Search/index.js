@@ -64,7 +64,7 @@ function SearchPage() {
               <SearchIcon />
             </button>
           </div>
-          {!!searchHistory && <HistoryButton onClick={() => setIsHistoryOpen(true)}>Ver histórico de buscas</HistoryButton>}
+          {!!searchHistory && <HistoryButton onClick={() => setIsHistoryOpen(true)}>Histórico de rastreios</HistoryButton>}
         </SearchContainer>
 
         <TrackerResult
@@ -72,6 +72,7 @@ function SearchPage() {
           isLoadingSearch={isLoadingSearch}
           trackingResults={trackingResult}
           searchError={searchError}
+          searchHistory={searchHistory}
         />
 
         <footer>

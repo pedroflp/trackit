@@ -112,4 +112,24 @@ export const TrackerInfoGeneral = styled.div`
     display: none;
   }
   
+`;
+
+export const EmptyState = styled.div`
+  opacity: 0.35;
+  padding: 2rem;
+  margin: 5rem auto;
+  width: 30%;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  border: 2px dashed ${COLORS.PRIMARY};
+  border-radius: 16px;
+
+  strong {
+    color: ${COLORS.PRIMARY};
+    font-size: 17px;
+  }
 `
