@@ -2,6 +2,7 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 import { createContext, useEffect, useState } from "react";
 import { HistoryModal } from "../components/HistoryModal";
+import { packageEventStatusEnum } from "../components/TrackerCard";
 import { STORAGE_KEYS } from "../constants/keys";
 import { getTrackingInfo } from "../services/request/GetTrackingInfo";
 
@@ -35,7 +36,7 @@ const SearchContextProvider = ({ children }) => {
 
       if (response.data) {
         setTrackingResult(response.data);
-        saveSearchHistory(response.data.codigo);
+        saveSearchHistory(response.data.codigo, response.data.eventos[0]);
 
         storagedHistory.find(item => {
           if (item.code === response.data.codigo) {
@@ -51,19 +52,23 @@ const SearchContextProvider = ({ children }) => {
     }
   };
 
-  const saveSearchHistory = (code) => {
+  const saveSearchHistory = (code, lastEvent) => {
+    let updatedList = [];
     const lastTenCodes = storagedHistory.slice(-10);
-
     const itemIndex = lastTenCodes.findIndex(history => history.code === code);
     const alreadyInList = itemIndex !== -1;
-    let updatedList = [];
 
     if (alreadyInList) {
       updatedList = lastTenCodes;
-      updatedList[itemIndex] = {
-        ...updatedList[itemIndex],
-        date: new Date().toISOString()
-      };
+      const isLastEventDeliveredConfirmation = lastEvent.status === packageEventStatusEnum.delivered;
+
+      if (isLastEventDeliveredConfirmation) {
+        updatedList = updatedList.filter(item => item.code !== code);
+      } else
+        updatedList[itemIndex] = {
+          ...updatedList[itemIndex],
+          date: new Date().toISOString()
+        };
     } else {
       const currentItemSearched = {
         code: code,

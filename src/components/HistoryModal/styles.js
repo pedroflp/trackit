@@ -14,7 +14,6 @@ export const Container = styled.div`
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  font-family: 'Commissioner';
 
   .history-list {
     overflow-y: scroll;
@@ -57,7 +56,6 @@ export const HistoryCard = styled.div`
   }
 
   button {
-    font-family: 'Commissioner';
     border: none;
     border-radius: 30px;
     padding: 12px 16px;

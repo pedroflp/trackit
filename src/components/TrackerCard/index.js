@@ -1,8 +1,13 @@
 import { COLORS } from '../../constants/colors';
 import { Container } from './styles';
 
+export const packageEventStatusEnum = {
+  delivered: 'Objeto entregue ao destinatário'
+}
+
 const TrackerCard = ({ id, status, data, hora, informations, local }) => {
-  const delivered = status === "Objeto entregue ao destinatário"
+  const delivered = status === packageEventStatusEnum.delivered
+
   return (
     <Container
       delivered={delivered}
@@ -11,7 +16,7 @@ const TrackerCard = ({ id, status, data, hora, informations, local }) => {
 
       <div className="card-top">
         <span className="card-id">
-          {status === "Objeto entregue ao destinatário" ?
+          {delivered ?
             <svg width="16" height="12" viewBox="0 0 16 12" fill="none" xmlns="http://www.w3.org/2000/svg">
               <path d="M5.52495 11.657L0.574951 6.707L1.98895 5.293L5.52645 8.8265L5.52495 8.828L14.01 0.343002L15.424
               1.757L6.93895 10.243L5.52595 11.656L5.52495 11.657Z" fill="#63c786" />

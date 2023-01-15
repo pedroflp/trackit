@@ -5,20 +5,20 @@ export const Container = styled.div`
   display: grid;
   grid-template-columns: 100%;
   grid-template-rows: 45vh 55vh;
-  width: 100vw;
-  height: 100vh;
+  width: 100%;
+  height: 100%;
   transition: 0.6s ease;
+  overflow: hidden;
 
   ${({ isShowingTracking }) => isShowingTracking && css`
     grid-template-rows: 5vh 95vh;
   `}
 
-
   footer {
     display: flex;
-    font-family: 'Commissioner';
     justify-content: center;
-    margin: 1rem auto;
+    margin: auto;
+    padding: 16px;
     position: absolute;
     bottom: 0;
     left: 0;
@@ -35,39 +35,37 @@ export const Container = styled.div`
 `
 
 export const HeaderContainer = styled.div`
-  width: 60%;
-  margin: -50px auto 0;
   display: flex;
   justify-content: center;
   align-items: center;
   transition: 0.8s ease;
+  max-width: 60%;
+  margin: 0 auto;
 
   ${({ isShowingTracking }) => isShowingTracking && css`
     opacity: 0.2;
     filter: blur(5px);
+    pointer-events: none;
   `}
 
   .title {
-    font-family: 'Commissioner';
     z-index: 2;
-
+    margin: auto;
+    
     h1 {
-      width: 100%;
       font-weight: 800;
       font-size: 70px;
       line-height: 60px;
       color: #003D73;
     }
-  }
 
-  .header-animation {
-    margin-bottom: -100px;
   }
 
   @media(max-width: 1500px) {
     .title {
       position: absolute;
-      width: 60%;
+      width: 80%;
+      margin: auto;
       
       h1 {
         font-size: 80px;
@@ -80,23 +78,27 @@ export const HeaderContainer = styled.div`
   @media(max-width: 700px) {
     .title {
       position: absolute;
-      width: 70%;
+      width: 100%;
       
       h1 {
-        font-size: 60px;
+        font-size: 50px;
         line-height: 50px;
         text-align: center;
       }
+    }
+
+    .header-animation {
+      transform: scale(0.7);
     }
   }
 `
 
 export const ContentContainer = styled.div`
   width: 100%;
-  flex-direction: 'column';
-  padding: 3rem 5rem 2rem;
+  display: flex;
+  flex-direction: column;
+  padding: 2rem 5rem;
   position: relative;
-  font-family: 'Commissioner';
   background-color: ${COLORS.BACKGROUND.MAIN};
 
   @media(max-width: 1000px) {
@@ -110,7 +112,7 @@ export const SearchContainer = styled.div`
   left: 0;
   right: 0;
   margin: auto;
-  margin-top: -25px;
+  transform: translateY(-25px);
   max-width: 60%;
   display: flex;
   align-items: center;
@@ -127,7 +129,6 @@ export const SearchContainer = styled.div`
     justify-content: center;
     align-items: center;
     transition: 400ms ease;
-    min-width: 260px;
     box-shadow: 0px 0px 20px rgba(0,0,0,0.08);
     overflow: hidden;
     border-radius: 8px;
@@ -141,7 +142,6 @@ export const SearchContainer = styled.div`
       outline: none;
       font-weight: 500;
       color: #2E3A59;
-      font-family: 'Commissioner';
       
       &::placeholder {
         color: #9babc5

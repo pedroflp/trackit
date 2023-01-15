@@ -54,9 +54,9 @@ function SearchPage() {
               placeholder="Pesquisar pelo código"
               onChange={handleChangeCode}
             />
-            <SmallHistoryButton onClick={() => setIsHistoryOpen(true)}>
+            {searchHistory?.length > 0 && <SmallHistoryButton onClick={() => setIsHistoryOpen(true)}>
               Ver histórico
-            </SmallHistoryButton>
+            </SmallHistoryButton>}
             <button
               disabled={
                 isLoadingSearch ||

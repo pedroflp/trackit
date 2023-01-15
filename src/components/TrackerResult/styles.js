@@ -86,7 +86,6 @@ export const TrackerList = styled.div`
 
 export const TrackerInfoGeneral = styled.div`
   display: flex;
-  min-width: 250px;
   width: 250px;
   margin-left: 5rem;
   flex-direction: column;
@@ -116,8 +115,8 @@ export const TrackerInfoGeneral = styled.div`
 export const EmptyState = styled.div`
   opacity: 0.35;
   padding: 2rem;
-  margin: 5rem auto;
-  width: 35rem;
+  margin: auto;
+  max-width: 35rem;
   display: flex;
   flex-direction: column;
   gap: 16px;
@@ -152,7 +151,6 @@ export const PackageNameInput = styled.input`
   border: none;
   text-transform: initial;
   text-align: center;
-  font-family: 'Commissioner';
   outline: none;
 
   &::placeholder {

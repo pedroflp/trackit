@@ -21,8 +21,10 @@ export const TrackerResult = ({
   if (!isLoadingSearch && !searchError && !hasTrackingInfo) return (
     <EmptyState>
       <strong>As informações do seu rastreio irão aparecer aqui.</strong>
-      <span>Digite o código na barra de busca e clique na lupinha<br />
-        <b>{!!searchHistory && `ou veja seus últimos rastreios no histórico!`}</b> <br />
+      <span>Digite o código na barra de busca e clique na lupinha
+        {searchHistory?.length > 0 ? <b><br />
+          ou veja seus últimos rastreios no histórico!
+        </b> : '!'} <br />
         Lembrando que, seu código deve ser parecido com esse baixo <br />
         para funcionar o rastreio!
       </span>
